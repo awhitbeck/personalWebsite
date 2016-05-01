@@ -1,0 +1,87 @@
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="Chart.js"></script>
+
+<body style="font: normal 15px Verdana, Arial, sans-serif;">
+
+  <!-- Start Figure -->
+  <div>
+    <!-- Graph Title  -->
+    <div>
+    </div>
+    <!-- Y-axis Title -->
+    <div style="position:fixed; top: 190; left: 0; width: 70px; height:20px; margin-top:0px; -ms-transform: rotate(-90deg); /* IE 9 */ -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */ transform: rotate(-90deg);">
+      Sensitivity
+    </div>
+    <!-- Canvas -->
+    <div style="position:fixed; top:0 ; left: 50;">
+      <canvas id="versusNpartons" width="800" height="400" style=""></canvas>
+    </div>
+    <!-- X-axis Title -->
+    <div style="position:fixed; top:420; left: 425; width: 100px; height:20px;margin-top: 0px;">
+      No. Partons
+    </div>
+  </div>
+  <!-- End Figure -->
+
+  <script src="dissectingJetsMET.js"></script>
+
+    <div class="dropdown" style="position:fixed; top:450; left: 430; width: 100px; height:20px;margin-top: 0px;">
+      <input name="Submit"  type="submit" value="Update" onclick="myFunc()" />
+    </div>
+    <div class="dropdown" style="position:fixed; top:480; left: 80; width: 100px; height:20px;margin-top: 0px;">
+      <select name="Variables1" style="background-color:rgba(75,192,75,.4)">
+	<option value="HT">HT</option>
+	<option value="MHT">MHT</option>
+	<option value="SumJetMass">SumJetMass</option>
+	<option value="AlphaT">AlphaT</option>
+      </select>
+    </div>
+    <div class="dropdown" style="position:fixed; top:480; left: 210; width: 100px; height:20px;margin-top: 0px;">
+      <select name="Variables2" style="background-color:rgba(75,192,192,.4)">
+	<option value="HT">HT</option>
+	<option value="MHT">MHT</option>
+	<option value="SumJetMass">SumJetMass</option>
+	<option value="AlphaT">AlphaT</option>
+      </select>
+    </div>
+    <div class="dropdown" style="position:fixed; top:480; left: 340; width: 100px; height:20px;margin-top: 0px;">
+      <select name="Variables3" style="background-color:rgba(75,75,192,.4);color:rgba(0,0,0,1)">
+	<option value="HT">HT</option>
+	<option value="MHT">MHT</option>
+	<option value="SumJetMass">SumJetMass</option>
+	<option value="AlphaT">AlphaT</option>
+      </select>
+    </div>
+    <div class="dropdown" style="position:fixed; top:480; left: 470; width: 100px; height:20px;margin-top: 0px;">
+      <select name="Variables4" style="background-color:rgba(192,75,192,.4)">
+	<option value="HT">HT</option>
+	<option value="MHT">MHT</option>
+	<option value="SumJetMass">SumJetMass</option>
+	<option value="AlphaT">AlphaT</option>
+      </select>
+    </div>
+    <div class="dropdown" style="position:fixed; top:480; left: 600; width: 100px; height:20px;margin-top: 0px;">
+      <select name="Variables5" style="background-color:rgba(192,192,75,.4)">
+	<option value="HT">HT</option>
+	<option value="MHT">MHT</option>
+	<option value="SumJetMass">SumJetMass</option>
+	<option value="AlphaT">AlphaT</option>
+      </select>
+    </div>
+    <div class="dropdown" style="position:fixed; top:480; left: 730; width: 100px; height:20px;margin-top: 0px;">
+      <select name="Variables5" style="background-color:rgba(192,75,75,.4)">
+	<option value="HT">HT</option>
+	<option value="MHT">MHT</option>
+	<option value="SumJetMass">SumJetMass</option>
+	<option value="AlphaT">AlphaT</option>
+      </select>
+    </div>
+
+</body>
+
+</html>

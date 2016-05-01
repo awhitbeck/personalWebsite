@@ -1,0 +1,17 @@
+body{
+  background: #eeeeee;
+  font-family:Arial;
+
+}
+
+
+#heading:before{
+	
+/*  margin-left: 20%;
+  margin-right: 20%;*/
+  
+  padding: 20px;	
+  border: 1px solid #666666;
+  content:"blah blah";
+
+}

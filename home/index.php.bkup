@@ -1,0 +1,70 @@
+
+<html>
+
+<head>
+<style>
+
+</style>
+<title>Andrew J. Whitbeck - home</title>
+<link href="myStyle.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<style>
+font-family: 'Open Sans Condensed'
+</style>
+
+</head>
+
+<body>
+
+<div style="width:960px;height:400px;padding:0px;margin-left:auto;margin-right:auto">
+
+  <div style="width:300px;height:200px;padding:0px;float:left">
+    <a href="https://twiki.cern.ch/twiki/bin/view/CMSPublic/Hig12016TWiki">
+    <img src="ZZ4muEventDisplay.png" height="200">        
+    </a>
+  </div>
+
+  <div style="width:660px;height:200px;padding:0px;float:right;text-align:right;">
+    <myStyle class="name">Andrew J. Whitbeck</myStyle> <br>
+    <myStyle class="JHU">Johns Hopkins University</myStyle> <br> 
+    <myStyle class="address">Department of Physics and Astronomy <br> 
+    366 Bloomberg Center <br> 
+    3400 North Charles Street  <br> 
+    Baltimore, MD 21218  <br> 
+    </myStyle>
+  </div>
+  
+  <div style="width:960px;padding:0px;height=100px;position:relative;text-align:center">
+    <hr>
+    <myStyle class="address">
+      <a href="index.php?content=home">Home</a>  
+      <a href="index.php?content=research">Research Interests</a>
+      <a href="index.php?content=publications">Publications</a>
+      <a href="index.php?content=presentations">Presentations</a>
+      <a href="index.php?content=outreach">Outreach</a>
+      <a href="https://www.pha.jhu.edu/~whitbeck/temp/myCV/myCV.pdf" target="_blank">Curriculum Vitae</a>
+      <a href="mailto:whitbeck@pha.jhu.edu">Contact</a>
+    </myStyle>
+    <hr>
+  </div>
+
+  <div style="width:960px;padding:0px;position:relative;text-align:left">
+
+<?php
+
+   $test= $_GET['content'];
+   
+   if ($test == "")
+      $test="home";
+
+   readfile($test.".html");
+
+?>    
+
+  </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style type="text/css">
+
+.axis path,
+.axis line {
+fill: none;
+stroke: black;
+shape-rendering: crispEdges;
+}
+
+.axis text {
+font-family: helvetica;
+font-size: 11px;
+
+.xlabel path,
+.xlabel line {
+fill: none;
+stroke: black;
+shape-rendering: crispEdges;
+}
+
+.label text {
+font-family: sans-serif;
+font-size: 8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<center>
+<h1>Snapshot of Spending, Revenue and the Deficit</h1>
+<p>
+These two stacked bars represent the projected federal budget. 
+The year's outlays, or total spending, are shown next to the year's revenue. 
+The difference in the bars is the deficit. 
+Mouse over the layers to see categories and dollar amounts.
+</p>
+<h3>Congressional Budget Office Projection, Jan. 2012</h3>
+<h3>$1.1 Trillion Deficit = Mismatch Between Spending and Revenue</h3>
+<div id="viz"></div>
+
+<form name="adjust" action="JavaScript:adjustRevenue()">
+
+0-20%:  <br>  0<input type="range" id="indivIncomeTax0-20" min="0" max="100">100<br>
+20-40%: <br>  0<input type="range" id="indivIncomeTax20-40" min="0" max="100">100<br>
+40-60%: <br>  0<input type="range" id="indivIncomeTax40-60" min="0" max="100">100<br>
+60-80%: <br>  0<input type="range" id="indivIncomeTax60-80" min="0" max="100">100<br>
+80-90%: <br>  0<input type="range" id="indivIncomeTax80-90" min="0" max="100">100<br>
+90-95%: <br>  0<input type="range" id="indivIncomeTax90-95" min="0" max="100">100<br>
+95-99%: <br>  0<input type="range" id="indivIncomeTax95-99" min="0" max="100">100<br>
+top 1%: <br>  0<input type="range" id="indivIncomeTaxTop1" min="0" max="100">100<br>
+
+Corporate Tax (billions): <input type="text" id="corpIncomeTax" value="242"><br>
+Social Insurance Tax (billions): <input type="text" id="socialInsuranceTax" value="854"><br>
+Other Tax (billions): <input type="text" id="otherTax" value="230"><br>
+<input type="submit" value="submit">
+</form>
+
+</center>
+<script>
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Andrew Whitbeck 
+  // December, 2012
+  // Replica of concord coalition's plot: 
+  // http://www.concordcoalition.org/issues/indicators/snapshot-spending-revenue-and-deficit
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  
+  //data stored here.  = = = = = = = = = 
+  //        Edit colors using color key
+  //        Edit position of columns with xbuffer 
+  //        Edit mouse over text with label
+  // = = = = = = = = = = = = = = = = = = 
+
+  var data  =    [
+		               {"label":"Individual income taxes (0-20th percentile): $","amount":"2.38","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (20-40th percentile): $","amount":"6.00","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (40-60th percentile): $","amount":"11.66","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (60-80th percentile): $","amount":"21.5","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (80-90th percentile): $","amount":"16.98","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (90-95th percentile): $","amount":"12.45","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (95-99th percentile): $","amount":"17.55","xbuffer":"0","color":"#70FFC9","height":""},
+		               {"label":"Individual income taxes (top 1%): $","amount":"24.45","xbuffer":"0","color":"#70FFC9","height":""},
+
+                               {"label":"Corporate income taxes: $","amount":"24.2","xbuffer":"0","color":"#36D792","height":""},
+			       {"label":"Social insurance taxes: $","amount":"85.4","xbuffer":"0","color":"#61D7A4","height":""},
+			       {"label":"Other taxes: $","amount":"23.0","xbuffer":"0","color":"#FF4900","height":""},
+			       {"label":"Health: $","amount":"83.8","xbuffer":"250","color":"#408DD2","height":""},
+			       {"label":"Social Security: $","amount":"77.3","xbuffer":"250","color":"#024E68","height":""},
+			       {"label":"Defense: $","amount":"68.0","xbuffer":"250","color":"#61B4CF","height":""},	
+			       {"label":"Income Security: $","amount":"54.2","xbuffer":"250","color":"#3AAACF","height":""},	
+			       {"label":"Interest: $","amount":"22.2","xbuffer":"250","color":"#06799F","height":""},	
+			       {"label":"Education: $","amount":"8.9","xbuffer":"250","color":"#00675C","height":""},	
+			       {"label":"Environment: $","amount":"4.2","xbuffer":"250","color":"#5DCFC3","height":""},	
+			       {"label":"International Affairs: $","amount":"4.7","xbuffer":"250","color":"#34CFBE","height":""},	
+			       {"label":"All Other: $","amount":"30.5","xbuffer":"250","color":"#009E8E","height":""}
+          	];
+
+  // = = = = = = = = = = = = = = = = = =
+
+  function prepData(data){
+
+    var lastBuffer = data[0].xbuffer;
+    var sum = 0;
+    for (var i=0; i<data.length; i++){
+
+      if(lastBuffer == data[i].xbuffer){
+        sum=sum+parseFloat(data[i].amount);      
+      }else{
+        sum=parseFloat(data[i].amount);
+      }
+      
+      data[i].height=sum;
+      lastBuffer=data[i].xbuffer;
+      data[i].label=data[i].label+data[i].amount*10+" billion";
+
+    }   
+
+    return data;
+
+  }
+
+  // = = = = = = = = = = = = = = = = = = 
+
+  function adjustRevenue(){
+     
+      data[0].amount=document.getElementById('indivIncomeTax0-20').value*2.38/17.4;
+      data[1].amount=document.getElementById('indivIncomeTax20-40').value*6.00/21.2;
+      data[2].amount=document.getElementById('indivIncomeTax40-60').value*11.66/25.2;
+      data[3].amount=document.getElementById('indivIncomeTax60-80').value*21.5/28.3;
+      data[4].amount=document.getElementById('indivIncomeTax80-90').value*16.98/29.5;
+      data[5].amount=document.getElementById('indivIncomeTax90-95').value*12.45/30.3;
+      data[6].amount=document.getElementById('indivIncomeTax95-99').value*17.55/30.4;
+      data[7].amount=document.getElementById('indivIncomeTaxTop1').value*24.45/29.0;
+
+      data[8].amount=document.getElementById('corpIncomeTax').value/10;
+      data[9].amount=document.getElementById('socialInsuranceTax').value/10;
+      data[10].amount=document.getElementById('otherTax').value/10;
+      draw(data);
+
+  } 
+
+  // = = = = = = = = = = = = = = = = = = 
+	// variables for SVG area
+  var plotWidth = 500;
+  var plotHeight= 500;
+  var padding = 30;
+	// = = = = = = = = = = = = = = = = = = 
+
+	// = = = = = = = = = = = = = = = = = = 
+	// scales for x and y axis
+	// this is a bit hacked, should be using
+	// scale to properly scale data (currently done "by hand")
+	
+  var yScale = d3.scale.linear()
+         	 .domain( [ 0 , 2449*4000/2449 ] )
+	         .range( [ plotHeight-padding , plotHeight-padding-244.9*4000/2449 ] );
+
+  var xScale = d3.scale.linear()
+         	 .domain( [ 0 , 1 ] )
+	         .range( [ 70 , plotWidth ] );
+
+	// = = = = = = = = = = = = = = = = = = 
+					 
+  var sampleSVG = d3.select("#viz")
+    .append("svg:svg")
+    .attr("width",plotWidth)
+    .attr("height",plotHeight);
+
+function draw(){
+  var revenueRect = sampleSVG.selectAll("rect")
+		            .data(prepData(data));
+								
+	              revenueRect.enter().append("rect")
+                        .attr("stroke","white")
+	                      .attr("fill", function(d){return d.color;})
+                        .attr("x",function(d){return +d.xbuffer+padding+50;})
+	                      .attr("y", function(d){return plotHeight-padding-d.height;})
+	                      .attr("width",200)
+	                      .attr("height",function(d){ return d.amount;})
+   	  	        .on("mouseover", function(){ d3.select(this).attr("stroke","black")})
+                        .on("mouseout",  function(){ d3.select(this).attr("stroke","white")})
+                        .append("title").text(function(d){return d.label;});
+
+	             revenueRect.attr("stroke","white")
+		     .transition().duration(1000)
+                     .attr("fill", function(d){return d.color;})
+                     .attr("x",function(d){return +d.xbuffer+padding+50;})
+	                      .attr("y", function(d){return plotHeight-padding-d.height;})
+	                      .attr("width",200)
+	                      .attr("height",function(d){ return d.amount;})
+		     
+}
+
+   draw()
+   
+   //Define Y axis
+    var yAxis = d3.svg.axis()
+	              .scale(yScale)
+		            .orient("left")
+		            .ticks(5);
+
+    //Create Y axis
+    sampleSVG.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(70,0)")
+       .call(yAxis);
+			 
+    //Define X axis
+    var xAxis = d3.svg.axis()
+	              .scale(xScale)
+      		      .orient("bottom")
+		            .ticks(0);
+
+    //Create X axis
+    sampleSVG.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(0,470)")
+       .call(xAxis);
+
+    sampleSVG.append("text")
+      .attr("font-size","14")
+      //.attr("font-family","helvetica")
+      .attr("text-anchor", "end")
+      .attr("x", 430)
+      .attr("y", 490)
+      .text("Outlays");
+
+    sampleSVG.append("text")
+      .attr("font-size","14")
+      //.attr("font-family","helvetica")
+      .attr("text-anchor", "end")
+      .attr("x", 180)
+      .attr("y", 490)
+      .text("Revenue");
+
+    sampleSVG.append("text")
+      .attr("font-size","14")
+      //.attr("font-family","helvetica")
+      .attr("text-anchor", "end")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -100)
+      .attr("y", 20)
+      .text("Billions of USD");
+
+</script>

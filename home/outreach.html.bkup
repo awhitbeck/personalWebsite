@@ -1,0 +1,118 @@
+<br><br>
+<center>
+<img src="http://upload.wikimedia.org/wikipedia/commons/0/00/Standard_Model_of_Elementary_Particles.svg" width=300>
+</center>
+<br>
+<p>
+I am currently working on new project to develop interactive web-based educational toos. 
+I have started with this simple one, which is an animated version of a famous cartoon of
+the standard model of particle physics (see picture above taken from 
+<a href="http://en.wikipedia.org/wiki/Standard_Model">wikipedia</a>.  It depicts the fundamental 
+particles in the standard model and some of their properties.  This diagram leaves out a 
+few aspects of the standard model which, I think, could be incorporated.  
+</p>
+<p>
+The first is the addition of the Higgs boson.  Since we know that something must break electroweak
+symmetry, and the Higgs is the simplest case, this should be considered as part of the
+picture. 
+</p>
+<p>
+Second, the interactions are left out.  I think in the vein of an interactive diagram, 
+one could simply highight the particles that gauge bosons interact with.  This could even
+be taken as far as drawing all of the possible primitive tree level feynman diagrams.  
+</p>
+<p>
+A working version of these developments can be found 
+<a href="http://www.pha.jhu.edu/~whitbeck/standardModel.html">here</a>.
+</p>
+
+<hr>
+
+    <div>
+    The Johns Hopkins Department of Physics and Astronomy is very committed
+    to outreach efforts.  The department hosts an <a href="http://physics-astronomy.jhu.edu/events/physics_fair/">annual fair</a>
+    which exhibits many entertaining and educational demonstrations.  In 
+    recent years, I have been responsible for particle physics related 
+    demonstrations which include a cloud chamber and a cosmic ray detector.
+    <br> <br>
+    In addition to this, myself and others from the high energy physics group
+    participate in the 
+    <a href="http://www.usasciencefestival.org/">USA Science and Engineering Festival</a> 
+    held in Washington, DC. 
+    </div>
+
+
+    <h1>2012 USA Science & Engineering Festival </h1>
+
+
+    <p>
+
+    <img src="2012scienceFestival_sara_andrew.JPG" width=300><br>
+    This year's science and engineering festival was held at the 
+    <a href="http://www.dcconvention.com/">Walter E Washington Convention Center</a>.  
+    The exhibit consisted of a cloud chamber, a cosmic ray detector, a cathode-ray, and
+    a mock accelerator for kids.  The picture to the left shows our post-doc, Sara
+    Bolognesi, and me in behind the cloud chamber and the cathode-ray.  
+    </p> 
+
+    <br>  
+
+    <h1> 2010 USA Science & Engineering Festival </h1>
+
+
+    <p>
+ 
+    <img src="2010festival.jpg" width=300><br> 
+    In October of 2010 myself and others from JHU participated in the inaugural 
+    USA Science and Engineering Festival, which was held on the national mall. 
+    As usual, our demonstrations consisted of a cloud chamber, a cosmic ray 
+    detector, and a cathode-ray.       
+    Our effort were also featured in the <a href="http://cmsinfo.web.cern.ch/cmsinfo/Media/Publications/CMStimes/2010/11_01/index.html">CMS times</a>.    
+    </p>
+    
+    <br>  
+
+    <hr>
+
+    <h1> Development of Visual Aids</h1>    
+    
+    <p>       
+    Together with an undergraduate student we developed a computer model of 
+    the cosmic ray detector.  A MC program was written which could model the 
+    angular distribution of cosmic ray tracks as well as a visualization 
+    which will draw tracks passing through the detector and triggering the 
+    photomultipliers (denoted by red cylinders).  The grey rectangles are
+    representations of the four scintillators.  
+    </p>
+
+    <br>
+    <center>
+    <img src="animation5_static.png" height=200 vspace=10>
+    <img src="animation3_static.png" height=200 vspace=10>
+    </center>
+    <br>
+
+    <p>
+    In order to engage kids in our demonstrations we allow them the chance
+    to win prizes if they
+    take a short trivia quiz in which all the answer can be found somewhere
+    in the exhibit, one of which asks for an estimation of the number of
+    cosmic rays which pass through ones body in a typical minute.  
+    </p>
+
+    <br>
+    <center>
+    <img src="animation2_static.png" width=300 vspace=10>
+    <img src="animation_static.png" width=300 vspace=10>
+    </center>
+    <br>
+
+    <p>
+    To help make the connection to the cosmic ray detector more explicit, 
+    we overlayed the animation of the detector on a cartoon person. The 
+    simulation of cosmic ray tracks were then drawn through both the detector
+    and persons.  
+    </p>
+
+
+

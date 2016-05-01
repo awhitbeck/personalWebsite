@@ -1,0 +1,10 @@
+Options +Indexes
+
+Satisfy Any
+PerlAuthenHandler NICEAuthentication
+PerlAuthzHandler NICEAuthorization
+SSLRequireSSL   # The modules only work using HTTPS
+AuthName "username"
+AuthType Basic
+
+Require group "cms-physics"

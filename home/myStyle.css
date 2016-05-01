@@ -1,0 +1,144 @@
+/*
+
+my color pallette:
+
+#d2d9cc // light gray 
+#ffab73 // light orange
+#de591f // orange
+#59473e // brown-gray
+#46a5bd // blue
+#b0ebe7 // light blue
+
+*/
+
+
+body{
+background-image:url('blackwood.jpg');
+background-color:#000000;
+background-size:100%;
+-webkit-background-size:100%;
+-moz-background-size:100%;
+font-family:'Open Sans Condensed',sans-serif;
+}
+
+.center-panel{
+background-color:rgba(255, 255, 255, .2);
+width:960px;
+padding:0px;
+margin-left:auto;
+margin-right:auto;
+border:solid 3px rgba(255, 255, 255, 1);
+-moz-border-radius-topright:25px;
+-moz-border-radius-bottomleft:25px;
+-webkit-border-top-right-radius:25px;
+-webkit-border-bottom-left-radius:25px;
+border-top-right-radius:25px;
+border-bottom-left-radius:25px;
+}
+
+.heading{
+background-color:rgba(255, 255, 255, .0);
+width:100%;
+height:200px;
+padding:0px;
+float:right;
+color:#FFFFFF;
+text-align:right;
+}
+
+a{
+padding:8px;
+}
+
+a:link {color:#46A5BD;text-decoration:none;font-weight:bold;}  /* link */
+a:visited {color:#46A5BD;text-decoration:none;font-weight:bold;}  /* visited link */
+a:hover {color:#DE591F;}      /* mouse over link */
+
+.link-bar{
+background-color:rgba(255, 255, 255, .0);
+width:100%;
+height:220px;
+padding:5px;
+position:relative;
+text-align:left;
+font-size: 20px;
+}
+
+
+.content{
+background-color:rgba(255, 255, 255, 1);
+width:920px;
+padding:20px;
+position:relative;
+text-align:left;
+font-size: 20px;
+//border:solid 3px rgba(255, 255, 255, 1);
+-moz-border-radius-bottomleft:25px;
+-webkit-border-bottom-left-radius:25px;
+border-bottom-left-radius:20px;
+}
+
+.post{
+width:300px;
+height:450px;
+transform:translate(25px,50px);
+-ms-transform: translate(25px,50px); /* IE 9 */
+-webkit-transform: translate(25px,50px); /* Safari and Chrome */
+float:left;
+border:solid 3px rgba(89, 71, 62, 1);
+-moz-border-radius-topright:25px;
+-moz-border-radius-topleft:25px;
+-moz-border-radius-bottomright:25px;
+-moz-border-radius-bottomleft:25px;
+-webkit-border-top-right-radius:25px;
+-webkit-border-top-left-radius:25px;
+-webkit-border-bottom-right-radius:25px;
+-webkit-border-bottom-left-radius:25px;
+border-top-right-radius:25px;
+border-top-left-radius:25px;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+background-color:rgba(255,255,255,1);
+}
+
+.post img{
+display: block;
+box-shadow: 3px 5px 1px #AAA;
+-webkit-box-shadow: 3px 5px 1px #AAA;
+-moz-box-shadow: 3px 5px 1px #AAA;
+}
+
+
+.line {
+fill: none;
+stroke: black;
+shape-rendering: crispEdges;
+}
+
+.norm {
+font-size: 18px;
+}
+
+.JHU {
+font-size: 24px;
+text-align:right;
+}
+
+.address{
+font-size: 16px;
+text-align:right;
+}
+
+.name {
+font-size: 48px;
+text-align:right;
+}
+
+.clear{ 
+clear: both; 
+}
+
+li{
+padding:5px;
+}
+

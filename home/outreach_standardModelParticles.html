@@ -1,0 +1,190 @@
+<br><br>
+<center>
+<img src="http://upload.wikimedia.org/wikipedia/commons/0/00/Standard_Model_of_Elementary_Particles.svg" width=300>
+</center>
+<br>
+<p>
+I am currently working on new project to develop interactive web-based educational toos. 
+I have started with this simple one, which is an animated version of a famous cartoon of
+the standard model of particle physics (see picture above taken from 
+<a href="http://en.wikipedia.org/wiki/Standard_Model">wikipedia</a>.  It depicts the fundamental 
+particles in the standard model and some of their properties.  This diagram leaves out a 
+few aspects of the standard model which, I think, could be incorporated.  
+</p>
+<p>
+The first is the addition of the Higgs boson.  Since we know that something must break electroweak
+symmetry, and the Higgs is the simplest case, this should be considered as part of the
+picture. 
+</p>
+<p>
+Second, the interactions are left out.  I think in the vein of an interactive diagram, 
+one could simply highight the particles that gauge bosons interact with.  This could even
+be taken as far as drawing all of the possible primitive tree level feynman diagrams.  
+</p>
+<p>
+A working version of these developments can be found before. 
+
+</p>
+
+<center>
+
+<div style="widht:960px">
+<div id="viz" style="float:left; width:900px;"/>
+<div id="notes" style="color:#59473e;float:left; width:900px; font-size:20px;
+padding:10px;
+border:solid 3px rgba(0, 0, 0, 1);
+-moz-border-radius-topright:25px;
+-moz-border-radius-topleft:25px;
+-moz-border-radius-bottomleft:25px;
+-moz-border-radius-bottomright:25px;
+-webkit-border-top-right-radius:25px;
+-webkit-border-top-left-radius:25px;
+-webkit-border-bottom-left-radius:25px;
+-webkit-border-bottom-right-radius:25px;
+border-top-right-radius:25px;
+border-top-left-radius:25px;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+">If you click, the corresponding particles area 
+will adjust to be proportional to its mass.
+</div
+</div>
+</center>
+
+<script>
+
+  var svg = d3.select("#viz")
+    .append("svg:svg")
+    .attr("width",500)
+    .attr("height",500);
+
+    var particles = [{"name":"Electron","mass":.511,"xpos":100,"ypos":400,"color":"aliceblue",
+                     "notes":"Electrons are one of the most common particles in nature.  They are a lepton, the general name for the particles in the blue box.  If you click, the area of the circle will adjust to be proportional to the particles mass."},
+                     {"name":"Muon","mass":105.7,"xpos":200,"ypos":400,"color":"steelblue",
+		     "notes":"Muons are like leptons in every way except they weigh ~200 times as much.   They are a lepton, the general name for the particles in the blue box.  Muons are commonly found in cosmic ray showers.   Thus, they are the heaviest of the lepton, the general name for the particles in the blue box.  If you click, the area of the circle will adjust to be proportional to the particles mass"},
+		     {"name":"Tau","mass":1777,"xpos":300,"ypos":400,"color":"blue",
+		     "notes":"Taus, like muons, share most properties with the electron.  However, it is 17 times as massive as the muon and 3400 times as massive as the electron.    If you click, the area of the circle will adjust to be proportional to the particles mass."},
+                     
+                     {"name":"Neutrino (Electron)","mass":0,"xpos":100,"ypos":300,"color":"aliceblue",
+		     "notes":"Neutrinos are the lightest of the leptons.  They are a very common by product of the Sun's fusion reactions.  They are bombarding us constantly but only react very very very rarely.  Electron neutrinos can only scatter with electrons."},
+                     {"name":"Neutrino (Muon)","mass":0,"xpos":200,"ypos":300,"color":"steelblue",
+		     "notes":"Neutrinos are the lightest of the leptons.  They are a very common by product of the Sun's fusion reactions.  They are bombarding us constantly but only react very very very rarely.  Muon neutrinos can only scatter with muons."},
+		     {"name":"Neutrino (Tau)","mass":0,"xpos":300,"ypos":300,"color":"blue",
+		     "notes":"Neutrinos are the lightest of the leptons.  They are a very common by product of the Sun's fusion reactions.  They are bombarding us constantly but only react very very very rarely.  Tau neutrinos can only scatter with taus. "},
+
+		     {"name":"Down","mass":4.8,"xpos":100,"ypos":200,"color":"green",
+		     "notes":"Down quarks are among the most common quarks, the general term to particles in the red box, found in nature.  They are one of the main constituents of both protons and neutrons.  "},
+		     {"name":"Strange","mass":104,"xpos":200,"ypos":200,"color":"green",
+		     "notes":"Strange quarks, the general term for paricles in the red box, are heavier, more rare versions of down quarks.  "},
+		     {"name":"Bottom","mass":4200,"xpos":300,"ypos":200,"color":"green",
+		     "notes":"Bottom quarks, the general term for paricles in the red box, are heavier, more rare versions of down quarks.  "},
+
+                     {"name":"Up","mass":2.4,"xpos":100,"ypos":100,"color":"maroon",
+		     "notes":"Up quarks are among the most common quarks, the general term for particles in the red box, found in nature.  Up quarks are also the lightest of the quarks.  They are one of the main constituents of both protons and neutrons.  "},
+		     {"name":"Charm","mass":1270,"xpos":200,"ypos":100,"color":"pink",
+		     "notes":"Charm quarks, the general term for particles in the red box, are heavier, more rare versions of up quarks.  "},
+		     {"name":"Top","mass":171200,"xpos":300,"ypos":100,"color":"red",
+		     "notes":"Top quarks, the general term for particles in the red box, are heaviest quark.  They were first discovered at the tevatron in 1995."},
+
+                     {"name":"Photon","mass":0,"xpos":400,"ypos":100,"color":"maroon",
+		     "notes":"Photons are the are the mediator of the electromagnetic force.  It is responsible for many of the interactions we encounter in our lives.  By exchanging a photon, two charged particles will either by attracted our repelled.  Photons are massless and as a result can interact over very large distances.  "},
+		     {"name":"Gluon","mass":0,"xpos":400,"ypos":200,"color":"pink",
+		     "notes":"Gluons are the mediator of strong force.  There are actually 8 copies of the gluon.  They only interact with particles that have a special attribute called color.  Color is the equivalent of charge in electromagnetic interactions.  Only quarks carry color.  Gluons are responsible for holding the proton and nuetron together.  "},
+		     {"name":"Z","mass":91200,"xpos":400,"ypos":300,"color":"red",
+		     "notes":"The Z is the neutral mediator of the weak force.  The weak force is responsible for different types of radioactivity.  Z's are very heavy, weighing in at 91 times the mass of a hydrogen nucleus.  As a result they can only interact over very short distances. "},
+		     {"name":"W+/-","mass":80400,"xpos":400,"ypos":400,"color":"red",
+		     "notes":"The W's (W+ and W-) are the charged mediators of the weak force.  The weak force is responsible for different types of radioactivity.  In particular, W's are responsible for beta decay.  W's are very heavy, weighing in at 80 times the mass of a hydrogen nucleus.  As a result they can only interact over very short distances. "}];
+		     
+  svg.append("rect")
+    .style("stroke","blue")
+    .style("fill","white")
+    .attr("width",295)
+    .attr("height",195)
+    .attr("x",50)
+    .attr("y",255);
+
+  svg.append("rect")
+    .style("stroke","red")
+    .style("fill","white")
+    .attr("width",295)
+    .attr("height",195)
+    .attr("x",50)
+    .attr("y",55);
+
+  svg.append("rect")
+    .style("stroke","purple")
+    .style("fill","white")
+    .attr("width",95)
+    .attr("height",395)
+    .attr("x",350)
+    .attr("y",55);
+
+  var circle = svg.selectAll("circle")
+    .data(particles);
+    
+    circle.enter().append("circle")
+    .attr("fill",function(d){return d.color;})
+    .attr("cy",function(d){return d.ypos;})
+    .attr("cx",function(d){return d.xpos;})
+    .attr("r", 10 )
+    .on("mousedown",animateFirstStep)
+    .append("title").text(function(d){return d.name;});
+
+    var labels = svg.selectAll("text")
+    .data(particles);
+
+    labels.enter().append("text")
+    .attr("font-size","12")
+    .attr("text-anchor","middle")
+    .attr("x",function(d){return d.xpos;})
+    .attr("y",function(d){return d.ypos-20;})
+    .text(function(d){return d.name;});
+    
+function animateFirstStep(){
+    
+    d3.select(this)
+      .transition()
+        .delay(0)
+        .duration(1000)
+	.attr("r", function(d){document.getElementById('notes').innerHTML = d.notes ; return Math.sqrt(d.mass);})
+        .each("end", animateSecondStep);
+
+};
+
+
+function animateSecondStep(){
+    d3.select(this)
+      .transition()
+        .delay(1000)
+        .duration(1000)
+        .attr("r", 10 );
+
+};
+
+svg.append("text")
+.attr("fill","blue")
+.attr("font-size","24")
+.attr("text-anchor","middle")
+.attr("x",200)
+.attr("y",470)
+.text("Leptons");
+
+svg.append("text")
+.attr("fill","red")
+.attr("font-size","24")
+.attr("text-anchor","middle")
+.attr("x",200)
+.attr("y",50)
+.text("Quarks");
+
+svg.append("text")
+.attr("fill","purple")
+.attr("font-size","24")
+.attr("text-anchor","middle")
+.attr("transform","rotate(90)")
+.attr("y",-450)
+.attr("x",250)
+.text("Force Mediators");
+    
+</script>
+

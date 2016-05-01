@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style type="text/css">
+
+.axis path,
+.axis line {
+fill: none;
+stroke: black;
+shape-rendering: crispEdges;
+}
+
+.axis text {
+font-family: sans-serif;
+font-size: 11px;
+}
+
+</style>
+</head>
+<style>
+</style>
+<body>
+
+<input name="generateButton" type="button" value="generate" onclick="generateData()"/>
+<input name="enumerateButton" type="button" value="draw graph" onclick="enumerateData()"/>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<font size=6><div id="viz"></div></font>
+
+<script>
+
+  var d = new Array()
+
+  var sampleSVG = d3.select("#viz")
+    .append("svg:svg")
+    .attr("width",500)
+    .attr("height",500)
+
+  var graphSVG = d3.select("#viz")
+    .append("svg:svg")
+    .attr("width", 500)
+    .attr("height",500);
+
+  function randomX(x){
+
+   var y = Math.random();
+
+   if ( y > Math.sin(x*2*3.1415)*Math.sin(x*2*3.1415) ){
+     d.push(x*500);
+     return x*500;
+     }
+
+   return 5000;
+
+  }    
+
+  function randomY(x){
+
+   var y = Math.random();
+   if ( y > 0 ){
+     return Math.random()*500;
+   }
+
+   return 5000;
+
+  }    
+
+  function generateData(){
+      
+      for(var i=0; i<1000; i++){ 
+        sampleSVG.append("svg:circle")  
+          .transition()
+            .duration(1000)
+          .attr("stroke",d3.rgb(Math.random()*255,Math.random()*255,Math.random()*255))
+          .attr("fill",d3.rgb(Math.random()*255,Math.random()*255,Math.random()*255))
+          .attr("r", 1 )
+          .attr("cx", randomY(Math.random()) )
+          .attr("cy", randomX(Math.random()) )
+      
+      }
+
+  }
+
+  function enumerateData(){
+   
+    var histogram = new Array()   
+
+    var ouputText="bin content: " 
+
+    var nBins = 20
+
+    var count
+
+    for ( var i=0 ; i<nBins ; i++){
+
+      count = 0
+
+      for ( var j = 0 ; j<d.length ; j++){
+        if ( d[j]>i*500/nBins && d[j]<=(i+1)*500/nBins ){
+          count = count+1
+        }
+      }
+
+      histogram.push([500*i/nBins+250/nBins,count])
+
+    }
+
+    var padding = 30;
+
+    var xScale = d3.scale.linear()
+                         .domain([0, d3.max(histogram, function(d) { return d[0]; })])
+                         .range([padding, 500 - padding * 2]);
+
+    var yScale = d3.scale.linear()
+			 .domain([0, d3.max(histogram, function(d) { return d[1]; })])
+	                 .range([500 - padding, padding]);
+
+    graphSVG.selectAll("circle")
+      .data(histogram)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) {
+        return xScale(d[0]);
+        })
+      .attr("cy", function(d) {
+        return yScale(d[1]);
+	})
+      .attr("r", 5);
+
+    //Define X axis
+    var xAxis = d3.svg.axis()
+	          .scale(xScale)
+		  .orient("bottom")
+		  .ticks(5);
+
+    //Define Y axis
+    var yAxis = d3.svg.axis()
+	              .scale(yScale)
+		      .orient("left")
+		      .ticks(5);
+
+    //Create X axis
+    graphSVG.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(0," + (500 - padding) + ")")
+       .call(xAxis);
+
+    //Create Y axis
+    graphSVG.append("g")
+       .attr("class", "axis")
+       .attr("transform", "translate(" + padding + ",0)")
+       .call(yAxis);
+
+  }
+
+
+</script>
